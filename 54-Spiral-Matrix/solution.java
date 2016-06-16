@@ -1,63 +1,52 @@
 public class Solution {
-   public List<Integer> spiralOrder(int[][] matrix) {
-		 
-		 ArrayList<Integer> result = new ArrayList<Integer>();
-		 if(matrix.length!=0){
-		 int numofelements=matrix.length*matrix[0].length;
-		 int count=0;
-		 int [] i={0,1,0,-1};
-		 int [] j={1,0,-1,0};
-		 int si=0;
-		 int sj=0;
-		 int colcount=matrix[0].length;
-		 int rowcount=matrix.length;
-		 int currentsize=colcount;
-		 boolean rowdir=false;
-		 while(count<numofelements)
-		 {
-			 for(int k=0;k<i.length;k++)
-			 {
-				if(currentsize==1)
-				{
-					result.add(matrix[si][sj]);
-					count++;
-				}
-				else
-				{
-					for(int m=0;m<currentsize-1;m++)
-					{
-						result.add(matrix[si+i[k]*m][sj+j[k]*m]);
-						count++;
-					}
-				}
-				if(count<numofelements)
-				{
-					if(!rowdir)
-					{
-						sj=sj+(j[k]*(currentsize-1));
-	                     if(sj==si)
-	                    	 si++;
-						currentsize=rowcount;
-					}
-					else
-					{
-						si=si+(i[k]*(currentsize-1));
-	
-						currentsize=colcount;
-					}
-					rowdir=!rowdir;
-				}
-				else
-				{
-					break;
-				}
-			 }
-			 si=si+1;
-			 sj=sj+1;
-			 colcount=colcount-2;
-			 rowcount=rowcount-2;
-			 currentsize=colcount;	
-		 }}
+   public  List<Integer> spiralOrder(int [][] matrix)
+	{
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if(matrix.length==0)
 		 return result;
+		int rowbegin=0;
+		int rowend=matrix.length-1;
+		int colbegin=0;
+		int colend=matrix[0].length-1;
+		int dir=0;
+		while(rowbegin<=rowend&&colbegin<=colend)
+		{
+			switch(dir)
+			{
+			  case 0:
+				  for(int k=colbegin;k<=colend;k++)
+				  {
+					  result.add(matrix[rowbegin][k]); 
+				  }
+				  dir=1;
+				  rowbegin++;
+			  break;
+			  case 1:
+				  for(int k=rowbegin;k<=rowend;k++)
+				  {
+					  result.add(matrix[k][colend]);
+				  }
+				  dir=2;
+				  colend--;
+			  break;
+			  case 2:
+				 for(int k=colend;k>=colbegin;k--)
+				 {
+					 result.add(matrix[rowend][k]);
+				 }
+				 dir=3;
+				 rowend--;
+			  break;
+			  case 3:
+				  for(int k=rowend;k>=rowbegin;k--)
+				  {
+					  result.add(matrix[k][colbegin]);
+				  }
+				  dir=0;
+				  colbegin++;
+			  break;
+			}
+		}
+        return result;
 	}
 }
