@@ -1,4 +1,5 @@
-public class Solution {
+public class Solution 
+{
     public int mySqrt(int a) 
     {
         int start=1;
