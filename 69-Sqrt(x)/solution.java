@@ -2,7 +2,7 @@ public class Solution
 {
     public int mySqrt(int a) 
     {
-        int start=1;
+         int start=1;
 	    int end =a;
 	    while(start<=end)
 	    {
@@ -20,6 +20,6 @@ public class Solution
     			start=mid+1;
     		}
 	    }
-	    return end;
+	    return start-1;
     }
 }
