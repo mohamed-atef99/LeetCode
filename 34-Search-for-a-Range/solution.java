@@ -1,84 +1,37 @@
 public class Solution {
     
-    public int[] searchRange(int[] a, int b) 
+    public int[] searchRange(int[] A, int target) 
 	{
-	    int elemindex=BinarySearch(a,b,0,a.length-1);
-	    int []  res=new int[2];
-	    res[0]=-1;
-	    res[1]=-1;
-	    if(elemindex==-1)
-	    {
-	        return res;
-	    }
-	    int start=-1;
-	    int end=-1;
-	    if((elemindex-1>=0&&a[elemindex-1]!=b)||elemindex-1<0)
-	    {
-	        start=elemindex;
-	    }
-	    else
-	    {
-	        start=searchRangeHelper(a,b,true,0,elemindex-1);
-	    }
-	   
-	    if((elemindex+1<a.length&&a[elemindex+1]!=b)||elemindex+1>=a.length)
-	    {
-	        end=elemindex;
-	    }
-	    else
-	    {
-	        end=searchRangeHelper(a,b,false,elemindex+1,a.length-1);
-	    }
-	    res[0]=start;
-	    res[1]=end;
-	    return res;
-	}
-	public static int searchRangeHelper(int [] a,int b ,boolean isbegin,int start,int end)
-	{
-	     int elemindex=BinarySearch(a,b,start,end);
-	     if(isbegin)
-	     {
-	          if((elemindex-1>=0&&a[elemindex-1]!=b)||elemindex-1<0)
-	          {
-	             return elemindex;
-	          }
-	          else
-	          {
-	            return searchRangeHelper(a,b,true,start,elemindex-1);
-	          }
-	     }
-	     else
-	     {
-	         if((elemindex+1<a.length&&a[elemindex+1]!=b)||elemindex+1>=a.length)
-	         {
-	            return elemindex;
-	         }
-    	     else
-    	     {
-    	        return searchRangeHelper(a,b,false,elemindex+1,end);
-    	     }
-	     }
-	}
-    
-	public static int BinarySearch(int [] a,int b,int start,int end)
-	{
-	    while(start<=end)
-	    {
-	        int mid=start+((end-start)/2);
-	        int CurrentElem=a[mid];
-	        if(CurrentElem==b)
-	        {
-	           return mid; 
-	        }
-	        else if(b>CurrentElem)
-	        {
-	            start=mid+1;
-	        }
-	        else
-	        {
-	            end=mid-1;
-	        }
-	    }
-	    return -1;
-	}
+	
+		        int n = A.length;
+		        int i = 0, j = n - 1;
+		        int []  ret=new int [2];
+			    ret[0]=-1;
+			    ret[1]=-1;
+		        // Search for the left one
+		        while (i < j)
+		        {
+		            int mid = (i + j) /2;
+		            if (A[mid] < target)
+                        i = mid + 1;
+		            else 
+		            	j = mid;
+		        }
+		        if (A[i]!=target) 
+		        	return ret;
+		        else 
+		        	ret[0]= i;
+
+		        // Search for the right one
+		        j = n-1;  // We don't have to set i to 0 the second time.
+		        while (i < j)
+		        {
+		            int mid = (i + j) /2 + 1;   // Make mid biased to the right
+		            if (A[mid] > target) 
+		            	j = mid - 1;  
+		            else i = mid;               // So that this won't make the search range stuck.
+		        }
+		        ret[1] =j;
+		        return ret; 
+		    }
 }
