@@ -19,9 +19,8 @@ public class Solution {
           next=head.next;
           head.next=previous;
           previous=head;
-          if(next!=null)
           head=next;
       }
-      return head;
+      return previous;
     }
 }
