@@ -8,13 +8,15 @@ public class Solution {
            
     	int [] MinCache=new int[amount];
     	
+    	int min=Integer.MAX_VALUE;
+    	int remaining=0;
     	for(int i=1;i<=amount;i++)
     	{
-    		int min=Integer.MAX_VALUE;
+    		min=Integer.MAX_VALUE;
     		
     		for(int bill:bills)
     		{
-    		    int remaining=i-bill;
+    		    remaining=i-bill;
     			if(remaining>0&&MinCache[remaining-1]>0)
     			  min=Math.min(MinCache[remaining-1]+1, min);
     			else if(i-bill==0)
