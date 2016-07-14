@@ -21,7 +21,7 @@ public class Solution {
     		    remaining=i-bill;
     			if(remaining>0&&MinCache[remaining-1]>0)
     			  min=Math.min(MinCache[remaining-1]+1, min);
-    			else if(i-bill==0)
+    			else if(remaining==0)
     				min=1;
     		}
     		MinCache[i-1]=min==Integer.MAX_VALUE?-1:min;
