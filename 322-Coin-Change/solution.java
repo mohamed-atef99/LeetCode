@@ -1,12 +1,14 @@
 public class Solution {
     public int coinChange(int[] bills, int amount)
     {
-        if(bills==null)
-          return -1;
-         if(amount==0)
-           return 0;
-           
-    	int [] MinCache=new int[amount];
+        if(amount ==0)
+    		return 0;
+    	if(amount<0)
+        	return -1;
+		if(bills==null)
+			return -1;
+		
+        int [] MinCache=new int[amount];
     	
     	int min=Integer.MAX_VALUE;
     	int remaining=0;
